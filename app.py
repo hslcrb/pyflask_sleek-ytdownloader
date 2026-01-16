@@ -32,6 +32,10 @@ if not os.path.exists(DOWNLOAD_FOLDER):
 def index():
     return render_template('index.html')
 
+@app.route('/intro')
+def intro():
+    return render_template('intro.html')
+
 @app.route('/api/info', methods=['POST'])
 def get_info():
     data = request.json
@@ -149,8 +153,33 @@ def download():
 
 @app.route('/api/open_folder', methods=['POST'])
 def open_folder():
+    path = DOWNLOAD_FOLDER
     if sys.platform == 'linux':
-        subprocess.call(['xdg-open', DOWNLOAD_FOLDER])
+        subprocess.call(['xdg-open', path])
+    elif sys.platform == 'win32':
+        os.startfile(path)
+    elif sys.platform == 'darwin':
+        subprocess.call(['open', path])
+    return jsonify({'success': True})
+
+@app.route('/api/open_file', methods=['POST'])
+def open_file():
+    data = request.json
+    filename = data.get('filename')
+    if not filename:
+        return jsonify({'error': '파일명이 필요합니다.'}), 400
+        
+    filepath = os.path.join(DOWNLOAD_FOLDER, filename)
+    if not os.path.exists(filepath):
+        return jsonify({'error': '파일을 찾을 수 없습니다.'}), 404
+
+    if sys.platform == 'linux':
+        subprocess.call(['xdg-open', filepath])
+    elif sys.platform == 'win32':
+        os.startfile(filepath)
+    elif sys.platform == 'darwin':
+        subprocess.call(['open', filepath])
+        
     return jsonify({'success': True})
 
 if __name__ == '__main__':

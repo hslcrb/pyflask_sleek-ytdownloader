@@ -379,6 +379,41 @@ select:hover {
     color: #51cf66;
 }
 
+/* Action Buttons */
+.status-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-action {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    color: var(--text-main);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* Mobile */
 @media (max-width: 600px) {
     h1 {
@@ -397,6 +432,10 @@ select:hover {
     .thumb-box img {
         width: 100%;
         max-width: 200px;
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -440,4 +479,81 @@ select:hover {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Footer & Intro Page */
+.footer-area {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.link-minimal {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+    padding-bottom: 2px;
+}
+
+.link-minimal:hover {
+    color: var(--text-main);
+    border-bottom-color: var(--accent);
+}
+
+.intro-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.logo-large {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    background: var(--title-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.intro-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.feature-card strong {
+    color: var(--text-main);
+    font-weight: 500;
 }

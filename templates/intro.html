@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Sleek | 슬릭 소개</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="wrapper intro-wrapper">
+        <div class="intro-header">
+            <h1 class="logo-large">Sleek</h1>
+            <p class="subtitle">The Last Downloader You'll Ever Need</p>
+        </div>
+
+        <div class="intro-content">
+            <div class="feature-card glass-panel">
+                <div class="icon-box">
+                    <i class="fas fa-feather-alt"></i>
+                </div>
+                <h3>Visual Serenity</h3>
+                <p>
+                    대부분의 다운로더는 복잡하고 투박합니다. Sleek은 다릅니다.
+                    <br>불필요한 요소를 모두 제거하고, 오직 컨텐츠에만 집중할 수 있는
+                    <strong>유려한 글래스모피즘 인터페이스</strong>를 제공합니다.
+                </p>
+            </div>
+
+            <div class="feature-card glass-panel">
+                <div class="icon-box">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Pure & Private</h3>
+                <p>
+                    광고, 트래커, 불필요한 설치 파일이 없습니다.
+                    <br>오직 순수한 Python 코드만으로 작동하며, 모든 데이터 처리는
+                    <strong>당신의 로컬 환경</strong>에서 안전하게 이루어집니다.
+                </p>
+            </div>
+
+            <div class="feature-card glass-panel">
+                <div class="icon-box">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Uncompromising Power</h3>
+                <p>
+                    업계 표준인 <strong>yt-dlp</strong> 엔진을 기반으로 구축되었습니다.
+                    <br>8K 초고화질부터 무손실 오디오까지, 현존하는 가장 강력한 다운로드 성능을 보장합니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-area">
+            <a href="/" class="btn btn-primary" style="text-decoration: none; padding: 1rem 3rem;">
+                Back to Sleek
+            </a>
+        </div>
+    </div>
+
+    <!-- Re-use theme logic inline for simplicity or import script -->
+    <script>
+        // Minimal theme logic for this page styling coherence
+        const savedTheme = localStorage.getItem('theme');
+        const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && sysDark)) {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.add('light-theme');
+        }
+    </script>
+</body>
+
+</html>

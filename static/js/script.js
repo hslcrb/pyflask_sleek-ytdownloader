@@ -10,8 +10,11 @@ const ui = {
     progress: document.getElementById('progressArea'),
     fill: document.getElementById('barFill'),
     percent: document.getElementById('progPercent'),
-    speed: document.getElementById('progSpeed')
+    speed: document.getElementById('progSpeed'),
+    actionButtons: document.getElementById('actionButtons')
 };
+
+let lastDownloadedFilename = null;
 
 function getQualityLabel(height) {
     const h = parseInt(height);
@@ -32,6 +35,7 @@ function analyzeUrl() {
     setLoading(ui.analyzeBtn, true);
     ui.infoGrid.classList.remove('active');
     ui.progress.classList.remove('active');
+    ui.actionButtons.style.display = 'none';
     showStatus('');
 
     fetch('/api/info', {
@@ -130,6 +134,8 @@ async function download(type) {
                     } else if (data.status === 'complete') {
                         updateProgress(100, '완료!');
                         showStatus(`다운로드 완료: ${data.filename}`, 'success');
+                        lastDownloadedFilename = data.filename;
+                        ui.actionButtons.style.display = 'flex';
                         setTimeout(() => {
                             // Optional: Reset UI or keep it
                             setLoading(btn, false);
@@ -203,3 +209,16 @@ toggleBtn.addEventListener('click', () => {
     const isCurrentDark = document.body.classList.contains('dark-theme');
     setTheme(!isCurrentDark);
 });
+
+function openFolder() {
+    fetch('/api/open_folder', { method: 'POST' });
+}
+
+function openFile() {
+    if (!lastDownloadedFilename) return;
+    fetch('/api/open_file', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: lastDownloadedFilename })
+    });
+}

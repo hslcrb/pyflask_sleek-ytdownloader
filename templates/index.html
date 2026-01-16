@@ -30,7 +30,17 @@
                 </button>
             </div>
 
-            <div class="status-msg" id="statusMsg"></div>
+            <div class="status-area">
+                <div class="status-msg" id="statusMsg"></div>
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn-action" onclick="openFile()" title="파일 열기">
+                        <i class="fas fa-play"></i> 파일 열기
+                    </button>
+                    <button class="btn-action" onclick="openFolder()" title="폴더 열기">
+                        <i class="fas fa-folder-open"></i> 폴더 열기
+                    </button>
+                </div>
+            </div>
 
             <div class="info-grid" id="infoGrid">
                 <div class="thumb-box">
@@ -68,6 +78,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="footer-area">
+        <a href="/intro" class="link-minimal">Learn more</a>
+    </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
