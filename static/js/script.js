@@ -14,7 +14,8 @@ const ui = {
     speed: document.getElementById('progSpeed'),
     actionButtons: document.getElementById('actionButtons'),
     pathInput: document.getElementById('savePath'),
-    pathBtn: document.getElementById('changePathBtn')
+    pathBtn: document.getElementById('changePathBtn'),
+    pathIcon: document.querySelector('.path-icon') // New
 };
 
 let lastDownloadedFilename = null;
@@ -276,6 +277,31 @@ if (ui.pathBtn) {
         if (e.key === 'Enter') {
             savePath();
         }
+    });
+}
+
+if (ui.pathIcon) {
+    ui.pathIcon.style.cursor = 'pointer';
+    ui.pathIcon.title = "폴더 찾기 (탐색기 열기)";
+    ui.pathIcon.addEventListener('click', () => {
+        // Visual feedback
+        ui.pathIcon.style.opacity = '0.5';
+
+        fetch('/api/select_folder', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                ui.pathIcon.style.opacity = '1';
+                if (data.success) {
+                    ui.pathInput.value = data.path;
+                    showStatus('저장 경로가 변경되었습니다.', 'success');
+                } else if (data.error) {
+                    showStatus('오류: ' + data.error, 'error');
+                }
+            })
+            .catch(err => {
+                ui.pathIcon.style.opacity = '1';
+                showStatus('폴더 선택 창 호출 실패', 'error');
+            });
     });
 }
 

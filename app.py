@@ -248,6 +248,39 @@ def handle_path_settings():
     
     return jsonify({'success': True, 'path': new_path})
 
+@app.route('/api/select_folder', methods=['POST'])
+def select_folder_dialog():
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+        
+        # Create a hidden root window
+        root = tk.Tk()
+        root.withdraw() # Hide the main window
+        
+        # Bring dialog to the front (OS dependent, best effort)
+        root.attributes('-topmost', True)
+        
+        # Open directory selection dialog
+        folder_path = filedialog.askdirectory(title="Select Download Folder")
+        
+        root.destroy()
+        
+        if folder_path:
+            # Update config immediately
+            config = load_config()
+            config['download_path'] = folder_path
+            save_config(config)
+            return jsonify({'success': True, 'path': folder_path})
+        else:
+            return jsonify({'success': False, 'message': 'Selection cancelled'})
+            
+    except ImportError:
+         return jsonify({'error': 'Tkinter not installed. Cannot open file dialog.'}), 501
+    except Exception as e:
+        print(f"Error opening folder dialog: {e}")
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     print(f"Starting server... Open http://localhost:5000 in your browser.")
     app.run(debug=True, port=5000)
