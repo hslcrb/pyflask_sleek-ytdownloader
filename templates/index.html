@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SleekDownloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="aurora-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <h1>Sleek Tube</h1>
+        <p class="subtitle">프리미엄 유튜브 다운로더</p>
+
+        <div class="input-group">
+            <div class="input-wrapper">
+                <input type="text" id="urlInput" placeholder="https://youtube.com/watch?v=..." autocomplete="off">
+            </div>
+        </div>
+
+        <div class="video-info" id="videoInfo">
+            <div class="info-content">
+                <div class="thumbnail-wrapper">
+                    <img id="thumbImg" src="" alt="Thumbnail">
+                </div>
+                <div class="text-info">
+                    <h3 id="videoTitle">동영상 제목</h3>
+                    <p id="videoMeta">길이 • 게시자</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="analyzeBtn" class="btn btn-primary" onclick="analyzeUrl()">
+                <span class="btn-text">링크 분석하기</span>
+                <div class="btn-loader">
+                    <div class="spinner"></div>
+                </div>
+            </button>
+
+            <div id="downloadOptions" style="display: none; gap: 10px; flex-direction: column;">
+                <select id="qualitySelect" class="quality-select">
+                    <!-- Options populated by JS -->
+                </select>
+
+                <button class="btn btn-primary" onclick="download('video')">
+                    <span class="btn-text"><i class="fas fa-video"></i> 비디오 다운로드 (MP4)</span>
+                    <div class="btn-loader">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+                <button class="btn btn-secondary" onclick="download('audio')">
+                    <span class="btn-text"><i class="fas fa-music"></i> 오디오만 다운로드 (MP3)</span>
+                    <div class="btn-loader">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="progress-wrapper" id="progressWrapper">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressPercent">0%</span>
+                <span id="progressSpeed">준비 중...</span>
+            </div>
+        </div>
+
+        <div class="status-msg" id="statusMsg"></div>
+    </div>
+
+    <button class="folder-btn" onclick="openFolder()" title="Open Downloads Folder">
+        <i class="fas fa-folder-open"></i>
+    </button>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
