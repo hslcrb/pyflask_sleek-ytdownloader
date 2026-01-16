@@ -4,89 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>About Sleek | 슬릭 소개</title>
+    <title>Sleek | Beyond Downloading</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
-    <div class="wrapper intro-wrapper">
-        <div class="intro-header">
+    <div class="wrapper intro-wrapper wide-wrapper">
+        <!-- Hero Section -->
+        <section class="intro-hero">
+            <span class="badge">v2.0 Latest Build</span>
             <h1 class="logo-large">Sleek</h1>
-            <p class="subtitle">The Last Downloader You'll Ever Need</p>
-        </div>
+            <p class="hero-subtitle">The Definition of <br>Modern Content Archiving</p>
+            <p class="hero-desc">
+                지저분한 웹사이트, 끝없는 광고, 불안한 보안 위협은 이제 잊으세요.<br>
+                <strong>Sleek</strong>은 오직 당신의 콘텐츠 소유권만을 위해 설계된<br>
+                가장 아름답고 강력한 데스크탑 솔루션입니다.
+            </p>
+            <a href="/" class="btn btn-primary btn-hero">Start Downloading <i class="fas fa-arrow-right"></i></a>
+        </section>
 
-        <div class="intro-content">
-            <div class="feature-card glass-panel">
-                <div class="icon-box">
-                    <i class="fas fa-feather-alt"></i>
+        <!-- Visual Showcase -->
+        <section class="visual-showcase glass-panel">
+            <div class="showcase-content">
+                <div class="showcase-text">
+                    <h2>Everything You Need.<br>Nothing You Don't.</h2>
+                    <p>복잡한 설정창 대신, 직관적인 흐름을 택했습니다. 링크를 넣는 순간, Sleek은 이미 당신의 의도를 파악하고 최적의 포맷을 준비합니다.</p>
                 </div>
+                <div class="showcase-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features Grid -->
+        <section class="features-grid">
+            <div class="feature-card glass-panel">
+                <div class="icon-box gradient-text"><i class="fas fa-eye"></i></div>
                 <h3>Visual Serenity</h3>
-                <p>
-                    대부분의 다운로더는 복잡하고 투박합니다. Sleek은 다릅니다.
-                    <br>불필요한 요소를 모두 제거하고, 오직 컨텐츠에만 집중할 수 있는
-                    <strong>유려한 글래스모피즘 인터페이스</strong>를 제공합니다.
-                </p>
+                <p>단순한 도구가 아닙니다. <strong>Glassmorphism</strong> 디자인 언어를 채택하여, 데스크탑 어느 곳에 두어도 예술 작품처럼 어우러집니다.</p>
             </div>
-
             <div class="feature-card glass-panel">
-                <div class="icon-box">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Pure & Private</h3>
-                <p>
-                    광고, 트래커, 불필요한 설치 파일이 없습니다.
-                    <br>오직 순수한 Python 코드만으로 작동하며, 모든 데이터 처리는
-                    <strong>당신의 로컬 환경</strong>에서 안전하게 이루어집니다.
-                </p>
+                <div class="icon-box gradient-text"><i class="fas fa-fingerprint"></i></div>
+                <h3>Privacy by Design</h3>
+                <p>클라우드로 데이터를 보내지 않습니다. 모든 프로세싱은 당신의 로컬 머신에서 이루어집니다. <strong>100% 오프라인 프라이버시</strong>를 보장합니다.</p>
             </div>
-
             <div class="feature-card glass-panel">
-                <div class="icon-box">
-                    <i class="fas fa-bolt"></i>
+                <div class="icon-box gradient-text"><i class="fas fa-bolt"></i></div>
+                <h3>Infinite Performance</h3>
+                <p>업계 표준 <strong>yt-dlp</strong> 엔진을 기반으로, 8K HDR 60fps 영상부터 320kbps 오디오까지 원본 그대로 추출합니다.</p>
+            </div>
+            <div class="feature-card glass-panel">
+                <div class="icon-box gradient-text"><i class="fas fa-sliders-h"></i></div>
+                <h3>Smart Configuration</h3>
+                <p>저장 경로 자동 기억, 선호 화질 자동 선택. 당신이 반복하던 귀찮은 작업들을 Sleek이 대신 기억하고 수행합니다.</p>
+            </div>
+        </section>
+
+        <!-- Technical Deep Dive -->
+        <section class="tech-specs glass-panel text-left">
+            <div class="tech-header">
+                <h2><i class="fas fa-microchip"></i> Engineered for Perfection</h2>
+                <p>Sleek은 최신 웹 기술과 강력한 Python 백엔드의 결합체입니다.</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>Backend Core</h4>
+                    <p>Python 3.12 + Flask + yt-dlp</p>
+                    <span class="detail">비동기 스트림 처리 & FFmpeg 오디오 변환</span>
                 </div>
-                <h3>Uncompromising Power</h3>
-                <p>
-                    업계 표준인 <strong>yt-dlp</strong> 엔진을 기반으로 구축되었습니다.
-                    <br>8K 초고화질부터 무손실 오디오까지, 현존하는 가장 강력한 다운로드 성능을 보장합니다.
-                </p>
+                <div class="tech-item">
+                    <h4>Frontend UX</h4>
+                    <p>Vanilla JS + CSS3 Variables</p>
+                    <span class="detail">Zero Dependencies, 60fps Animations</span>
+                </div>
+                <div class="tech-item">
+                    <h4>System Integration</h4>
+                    <p>Native File System Access</p>
+                    <span class="detail">OS별(Win/Mac/Linux) 폴더 연동 & 자동 경로 감지</span>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="intro-sections">
-            <div class="glass-panel text-left">
-                <h2><i class="fas fa-code"></i> Under the Hood</h2>
-                <p>
-                    Sleek은 최신 웹 기술과 강력한 백엔드의 조화입니다.
-                </p>
-                <ul class="tech-list">
-                    <li><strong>Backend:</strong> Python Flask & yt-dlp</li>
-                    <li><strong>Frontend:</strong> Vanilla JS, CSS Glassmorphism</li>
-                    <li><strong>Design:</strong> Minimalist & Adaptive Theme</li>
-                </ul>
-            </div>
-
-            <div class="glass-panel text-left">
-                <h2><i class="fas fa-magic"></i> How to Use</h2>
-                <ol class="usage-list">
-                    <li><strong>복사:</strong> 유튜브 영상 링크를 복사하세요.</li>
-                    <li><strong>붙여넣기:</strong> Sleek의 입력창에 링크를 넣으세요.</li>
-                    <li><strong>클릭:</strong> 분석 버튼을 누르고 원하는 화질을 선택하세요.</li>
-                    <li><strong>완료:</strong> 다운로드 후 바로 감상하세요.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="footer-area">
-            <a href="/" class="btn btn-primary" style="text-decoration: none; padding: 1rem 3rem;">
-                Back to Sleek
-            </a>
-        </div>
+        <footer class="intro-footer">
+            <p>Ready to experience the difference?</p>
+            <a href="/" class="link-minimal">Back to App</a>
+        </footer>
     </div>
 
-    <!-- Re-use theme logic inline for simplicity or import script -->
     <script>
-        // Minimal theme logic for this page styling coherence
         const savedTheme = localStorage.getItem('theme');
         const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (savedTheme === 'dark' || (!savedTheme && sysDark)) {
