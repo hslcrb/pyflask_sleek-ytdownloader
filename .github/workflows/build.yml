@@ -1,0 +1,93 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            artifact_name: SleekDownloader_Linux.zip
+            asset_name: v1.0-Release-exe-Linux.zip
+          - os: windows-latest
+            artifact_name: SleekDownloader_Windows.zip
+            asset_name: v1.0-Release-exe-Windows.zip
+          - os: macos-latest
+            artifact_name: SleekDownloader_macOS.zip
+            asset_name: v1.0-Release-exe-macOS.zip
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        shell: bash
+        run: |
+          pyinstaller --onedir --contents-directory "__internal__" \
+            --add-data "static:static" \
+            --add-data "templates:templates" \
+            --add-data "info.json:." \
+            --name SleekDownloader \
+            --noconsole app.py
+
+      - name: Archive build (Unix)
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd dist
+          zip -r ../${{ matrix.artifact_name }} SleekDownloader
+
+      - name: Archive build (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd dist
+          Compress-Archive -Path SleekDownloader -DestinationPath ../${{ matrix.artifact_name }}
+        shell: pwsh
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-build
+          path: ${{ matrix.artifact_name }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: builds
+
+      - name: Create or Update Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            builds/ubuntu-latest-build/SleekDownloader_Linux.zip
+            builds/windows-latest-build/SleekDownloader_Windows.zip
+            builds/macos-latest-build/SleekDownloader_macOS.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
