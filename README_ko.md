@@ -51,7 +51,15 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 4. `SleekDownloader` 실행 파일을 실행합니다.
 5. 브라우저 창이 자동으로 열리지 않을 경우, 주소창에 `http://localhost:5000`을 입력하여 접속하세요.
 
-### 2. 소스 코드에서 실행 (개발자용)
+### 2. Docker로 실행
+Sleek은 GitHub Packages에서 Docker 이미지로 제공됩니다:
+```bash
+docker pull ghcr.io/hslcrb/pyflask_sleek-ytdownloader:latest
+docker run -p 5000:5000 ghcr.io/hslcrb/pyflask_sleek-ytdownloader:latest
+```
+`http://localhost:5000`으로 접속하세요.
+
+### 3. 소스 코드에서 실행 (개발자용)
 
 #### 필수 조건
 - Python 3.8 이상

@@ -51,7 +51,15 @@ The easiest way to use Sleek is to download the pre-built executable for your op
 4. Run the `SleekDownloader` executable.
 5. Your browser will NOT open automatically; please navigate to `http://localhost:5000`.
 
-### 2. Run from Source (For Developers)
+### 2. Run via Docker
+Sleek is available as a Docker image on GitHub Packages:
+```bash
+docker pull ghcr.io/hslcrb/pyflask_sleek-ytdownloader:latest
+docker run -p 5000:5000 ghcr.io/hslcrb/pyflask_sleek-ytdownloader:latest
+```
+Navigate to `http://localhost:5000`.
+
+### 3. Run from Source (For Developers)
 
 #### Prerequisites
 - Python 3.8 or higher
