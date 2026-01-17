@@ -41,15 +41,24 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 - **프론트엔드**: HTML5, Vanilla JS, CSS3 (Variables, Flexbox/Grid, Backdrop Filter)
 - **라이선스**: Apache 2.0
 
-## 🚀 시작하기
+## 🚀 설치 및 시작하기
 
-### 필수 조건
+### 1. 간편 실행 (빌드된 실행 파일 사용) - **권장**
+새로운 버전을 가장 쉽게 사용하는 방법은 미리 빌드된 실행 파일을 다운로드하는 것입니다.
+1. [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases) 페이지로 이동합니다.
+2. 사용 중인 OS(Windows, Linux, macOS)에 맞는 `.zip` 파일을 다운로드합니다.
+3. 압축을 해제합니다.
+4. `SleekDownloader` 실행 파일을 실행합니다.
+5. 브라우저 창이 자동으로 열리지 않을 경우, 주소창에 `http://localhost:5000`을 입력하여 접속하세요.
 
+### 2. 소스 코드에서 실행 (개발자용)
+
+#### 필수 조건
 - Python 3.8 이상
-- FFmpeg (비디오와 오디오 스트림 병합에 필요)
+- **FFmpeg**: 비디오와 오디오 스트림 병합에 필수적입니다.
+- **python3-tk**: 리눅스 환경에서 폴더 선택 창을 사용하기 위해 필요합니다 (`sudo apt-get install python3-tk`).
 
-### 설치 방법
-
+#### 실행 단계
 1. **저장소 클론하기**
    ```bash
    git clone https://github.com/hslcrb/pyflask_sleek-ytdownloader.git
@@ -57,12 +66,11 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
    ```
 
 2. **시작 스크립트 실행** (Linux/macOS)
-   이 스크립트는 가상 환경 설정, 의존성 설치, 서버 시작을 자동으로 수행합니다.
    ```bash
    ./start_server.sh
    ```
 
-3. **수동 설치** (Windows/기타)
+3. **수동 설정**
    ```bash
    python -m venv venv
    source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -70,8 +78,8 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
    python app.py
    ```
 
-4. **브라우저에서 열기**
-   `http://localhost:5000`으로 접속하여 Sleek을 경험해보세요.
+4. **접속**
+   브라우저에서 `http://localhost:5000`으로 접속합니다.
 
 ## 🤝 기여하기
 
@@ -83,5 +91,5 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 
 ---
 <p align="center">
-  © 2026 Rheehose (Rhee Creative). 열정으로 제작되었습니다.
+  © 2026 Rhee Creative. 열정으로 제작되었습니다.
 </p>

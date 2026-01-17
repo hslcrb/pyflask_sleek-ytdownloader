@@ -41,15 +41,24 @@ Sleek is designed for those who value **aesthetics**, **privacy**, and **control
 - **Frontend**: HTML5, Vanilla JS, CSS3 (Variables, Flexbox/Grid, Backdrop Filter)
 - **License**: Apache 2.0
 
-## 🚀 Getting Started
+## 🚀 Installation & Setup
 
-### Prerequisites
+### 1. Simple Run (Pre-built Executables) - **Recommended**
+The easiest way to use Sleek is to download the pre-built executable for your operating system:
+1. Go to the [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases) page.
+2. Download the `.zip` file for your OS (Windows, Linux, or macOS).
+3. Extract the zip file.
+4. Run the `SleekDownloader` executable.
+5. Your browser will NOT open automatically; please navigate to `http://localhost:5000`.
 
+### 2. Run from Source (For Developers)
+
+#### Prerequisites
 - Python 3.8 or higher
-- FFmpeg (required for merging video and audio streams)
+- **FFmpeg**: Required for merging video and audio streams.
+- **python3-tk**: Required for the folder selection dialog on Linux (`sudo apt-get install python3-tk`).
 
-### Installation
-
+#### Steps
 1. **Clone the repository**
    ```bash
    git clone https://github.com/hslcrb/pyflask_sleek-ytdownloader.git
@@ -57,21 +66,20 @@ Sleek is designed for those who value **aesthetics**, **privacy**, and **control
    ```
 
 2. **Run the start script** (Linux/macOS)
-   This script will automatically set up a virtual environment, install dependencies, and start the server.
    ```bash
    ./start_server.sh
    ```
 
-3. **Manual Install** (Windows/Alternative)
+3. **Manual Setup**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   source venv/bin/activate  # Windows: venv\Scripts\activate
    pip install -r requirements.txt
    python app.py
    ```
 
-4. **Open in Browser**
-   Navigate to `http://localhost:5000` to experience Sleek.
+4. **Access the App**
+   Open your browser and navigate to `http://localhost:5000`.
 
 ## 🤝 Contributing
 
