@@ -83,5 +83,5 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ---
 <p align="center">
-  © 2026 RheeWorks. Crafted with passion.
+  © 2026 Rhee Creative. Crafted with passion.
 </p>

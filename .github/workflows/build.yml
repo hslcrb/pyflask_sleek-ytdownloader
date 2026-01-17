@@ -18,14 +18,14 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
-            artifact_name: SleekDownloader_Linux.zip
-            asset_name: v1.0-Release-exe-Linux.zip
+            artifact_name: SleekDownloader_Linux
+            asset_name: SleekDownloader-v1.0-Linux.zip
           - os: windows-latest
-            artifact_name: SleekDownloader_Windows.zip
-            asset_name: v1.0-Release-exe-Windows.zip
+            artifact_name: SleekDownloader_Windows
+            asset_name: SleekDownloader-v1.0-Windows.zip
           - os: macos-latest
-            artifact_name: SleekDownloader_macOS.zip
-            asset_name: v1.0-Release-exe-macOS.zip
+            artifact_name: SleekDownloader_macOS
+            asset_name: SleekDownloader-v1.0-macOS.zip
     
     steps:
       - name: Checkout code
@@ -45,7 +45,7 @@ jobs:
       - name: Build with PyInstaller
         shell: bash
         run: |
-          pyinstaller --onedir --contents-directory "__internal__" \
+          pyinstaller --noconfirm --onedir --contents-directory "__internal__" \
             --add-data "static:static" \
             --add-data "templates:templates" \
             --add-data "info.json:." \
@@ -56,20 +56,20 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: |
           cd dist
-          zip -r ../${{ matrix.artifact_name }} SleekDownloader
+          zip -r ../${{ matrix.asset_name }} SleekDownloader
 
       - name: Archive build (Windows)
         if: matrix.os == 'windows-latest'
         run: |
           cd dist
-          Compress-Archive -Path SleekDownloader -DestinationPath ../${{ matrix.artifact_name }}
+          Compress-Archive -Path SleekDownloader -DestinationPath ../${{ matrix.asset_name }}
         shell: pwsh
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-build
-          path: ${{ matrix.artifact_name }}
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.asset_name }}
 
   release:
     needs: build
@@ -80,14 +80,23 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: builds
+          merge-multiple: true
 
       - name: Create or Update Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
+          name: "v1.0 Release-exe"
+          body: |
+            ## Sleek Downloader v1.0 Release
+            
+            This release includes pre-built executables for Linux, Windows, and macOS.
+            
+            - **Pure. Potent. Permanent.**
+            - **Organization**: Rhee Creative
+            - **Date**: 2026-01-16
           files: |
-            builds/ubuntu-latest-build/SleekDownloader_Linux.zip
-            builds/windows-latest-build/SleekDownloader_Windows.zip
-            builds/macos-latest-build/SleekDownloader_macOS.zip
+            SleekDownloader-v1.0-Linux.zip
+            SleekDownloader-v1.0-Windows.zip
+            SleekDownloader-v1.0-macOS.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

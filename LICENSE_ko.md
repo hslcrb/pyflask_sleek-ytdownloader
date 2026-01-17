@@ -13,7 +13,7 @@
       "라이선스 제공자"는 라이선스를 부여하는 저작권 소유자 또는 저작권 소유자로부터 권한을 위임받은 주체를 의미합니다.
       (이하 생략 - 원본 참조)
 
-   Copyright 2026 Rheehose (RheeWorks)
+   Copyright 2026 Rheehose (Rhee Creative)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

@@ -83,5 +83,5 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 
 ---
 <p align="center">
-  © 2026 Rheehose (RheeWorks). 열정으로 제작되었습니다.
+  © 2026 Rheehose (Rhee Creative). 열정으로 제작되었습니다.
 </p>
