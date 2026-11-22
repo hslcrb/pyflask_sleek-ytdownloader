@@ -1,33 +1,31 @@
-# Sleek Desktop and CLI v2.0.0-rc.1
+# Sleek Desktop and CLI v2.0.0-rc.2
 
-The desktop app opens its own Electron window. It does not start Flask, open a console, or launch a browser. Both the desktop and the command line use the same Rust engine. yt-dlp extracts media, and FFmpeg/FFprobe handle media processing and tags.
+Download the OS-specific **Desktop** or **CLI** package from [GitHub Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases). Both include yt-dlp, FFmpeg, FFprobe and Deno. No separate media-tool installation or PATH setup is required. The desktop app opens its own Electron window without starting Flask or the system browser.
 
-## Windows x64
+| Package | Start |
+| --- | --- |
+| Windows x64 desktop | Run the setup EXE, then open **Sleek Desktop** from the Start menu. |
+| Windows x64 CLI | Extract the ZIP and run `sleek.exe --help` or `sleek.exe doctor --json`. |
+| Linux x64 desktop | Extract the TAR.GZ into a writable folder and run `./SleekDownloader` in the extracted directory. |
+| Linux x64 CLI | Extract the TAR.GZ and run `./sleek doctor --json` in the extracted directory. |
 
-- **Desktop:** run the setup EXE, or extract the entire portable ZIP and double-click `SleekDownloader.exe`. Do not move the EXE out of its folder.
-- **CLI:** extract the CLI ZIP and run `sleek.exe --help` or `sleek.exe doctor --json`. Keep its `tools` directory beside it.
-- **Prerequisites:** install [FFmpeg and FFprobe](https://ffmpeg.org/download.html#build-windows) and add their bin directory to PATH. For YouTube, install [Deno](https://docs.deno.com/runtime/getting_started/installation/) and add it to PATH, then restart the app. yt-dlp is included. Alternatively place the external binaries in the CLI's `tools` directory or the desktop install's `resources/backend/tools`.
-- Windows packages are unsigned. Download only from the project and check SHA-256 before use. Use only on media you are allowed to download and retain.
+Keep the extracted directory intact. Packaged builds intentionally do not fall back to a different tool on PATH. If a dependency is missing, re-extract the release package and check its SHA-256. Windows packages are unsigned. Linux requires glibc 2.39+ and normal desktop libraries to start Electron; the CLI does not require a desktop. Downloads require network access. Only download media you are allowed to retain.
 
 ## Agent CLI
 
-```powershell
-.\sleek.exe doctor --json
-.\sleek.exe download "https://example.com/media" --video --output ".\archive" --json
-.\sleek.exe download "https://example.com/media" --audio --output ".\archive" --json
-.\sleek.exe download "https://example.com/media" --audio --no-comments --json
+```sh
+sleek doctor --json
+sleek download "https://example.com/media" --video --output "./archive" --json
+sleek download "https://example.com/media" --audio --output "./archive" --json
+sleek download "https://example.com/media" --audio --no-comments --json
 ```
 
-Video is the default; audio exports MP3. Each job accepts one URL and limits playlist extraction to one entry. The CLI defaults to the current directory; the desktop defaults to Windows Downloads and has a native folder picker. Existing files are not overwritten.
+For an extracted archive, invoke `./sleek` or `.\sleek.exe` directly. Video is the default; audio exports MP3. Each job accepts one URL and limits playlist extraction to one entry. The CLI defaults to the current directory; the desktop defaults to the OS Downloads folder and has a native folder picker. Existing files are not overwritten.
 
-Both modes request a `.description` and `.info.json` beside the media and embed tags where supported. The JSON includes available comments when supplied by the extractor. Deleted, private, disabled or inaccessible comments and descriptions cannot be recovered. Comment collection can be slow. Use `--no-comments` to skip the explicit collection request without disabling metadata or description sidecars. Treat comments as untrusted content and do not feed them to an agent as instructions.
+Both modes request a `.description` and `.info.json` next to the media and embed tags where supported. Available comments are included in JSON when the extractor supplies them. Comment collection can be slow. Use `--no-comments` to skip explicit collection while keeping metadata and descriptions. Comments are untrusted content, not instructions for an agent.
 
-`--json` sends newline-delimited events with `schema_version: 1`: `started`, zero or more `progress` and `saved` events, then `completed` or `error`. `saved` returns the absolute media path and any existing sidecar paths. A missing total or sidecar is represented by `null`. Watch the exit code as well as the final event: `0` success, `2` input/output path error, `3` missing or unstartable dependency, `4` download/extractor failure. Extractor diagnostics go to stderr, never mixed into the machine stream.
+`--json` sends one event per line on stdout, with `schema_version: 1`. Downloads emit `started`, zero or more `progress` and `saved` events, then `completed` or `error`. `saved` returns absolute media and existing sidecar paths. Missing totals and sidecars appear as `null`. Exit codes: `0` success; `2` input/output error; `3` unavailable media tool; `4` download failure. Diagnostics are on stderr. `doctor` lists path and availability for each bundled tool; missing Deno does not block non-YouTube uses of a source build.
 
 ## Build
 
-- `cargo build --manifest-path engine/Cargo.toml --release --locked`
-- Run the desktop source with Electron 45.4.1 from `desktop` after the native engine build.
-- For Windows packaging, cross-build the Rust target `x86_64-pc-windows-gnu` or use a Windows GNU toolchain. Run `python scripts/build_electron_windows.py INPUTS SLEEK_EXE OUTPUT --makensis makensis`. The inputs are the official Electron v45.4.1 Windows x64 ZIP, official yt-dlp 2026.10.26 Windows x64 EXE, and yt-dlp's published license. The script pins artifact hashes and emits SHA-256 checksums. FFmpeg, FFprobe and Deno are not redistributed in these archives.
-
-Electron's license and Chromium notices are preserved from its official archive. The bundled yt-dlp binary has its own [release licensing notes](https://github.com/yt-dlp/yt-dlp#licensing) and is not relicensed under Sleek's Apache license. The older Flask implementation is retained for existing deployments, but it is not started by the v2 desktop or CLI.
+Build the Rust engine with `cargo build --manifest-path engine/Cargo.toml --release --locked`; cross-build to `x86_64-pc-windows-gnu` for Windows. See [third-party sources](bundled-dependencies.md) for pinned inputs and the FFmpeg recipe, and [the bundler](../scripts/build_bundled_release.py) for archive generation and SHA-256 verification. The old Flask source is still available for legacy deployments but is not part of these packages.

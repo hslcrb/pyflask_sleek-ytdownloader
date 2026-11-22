@@ -53,3 +53,4 @@ config.json
 desktop/node_modules/
 engine/target/
 dist-v2/
+dist-bundled/

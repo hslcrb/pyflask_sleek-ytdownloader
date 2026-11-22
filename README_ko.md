@@ -21,7 +21,7 @@
 
 ## Electron 데스크톱과 에이전트 CLI
 
-v2 릴리즈 후보는 브라우저나 Flask 서버를 열지 않습니다. Electron 앱과 영어 명령의 Rust CLI가 같은 엔진을 사용하며, 설명·메타데이터·가져올 수 있는 댓글을 기본 저장합니다. Windows 설치와 영어 CLI, JSON 출력은 [사용 안내](docs/desktop-cli.md)를 참고하세요.
+v2 릴리즈 후보는 브라우저나 Flask 서버를 열지 않습니다. Electron 앱과 영어 명령의 Rust CLI가 같은 엔진을 사용하며, 설명·메타데이터·가져올 수 있는 댓글을 기본 저장합니다. 필요한 미디어 도구는 Windows와 Linux x64 패키지에 동봉됩니다. 설치와 영어 CLI, JSON 출력은 [사용 안내](docs/desktop-cli.md)를 참고하세요.
 
 ## 📖 소개
 

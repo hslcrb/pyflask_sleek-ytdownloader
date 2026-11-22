@@ -21,7 +21,7 @@
 
 ## Desktop and agent CLI
 
-The v2 release candidate adds a native Electron window and a standalone Rust CLI. No browser or Flask server is opened. Both save descriptions, metadata and available comments by default. See the [desktop and CLI guide](docs/desktop-cli.md) for Windows setup, commands and the JSON protocol.
+The v2 bundled release candidate adds a native Electron window and a standalone Rust CLI. No browser or Flask server is opened. Both save descriptions, metadata and available comments by default. Windows and Linux x64 packages include the media tools. See the [desktop and CLI guide](docs/desktop-cli.md) for Windows setup, commands and the JSON protocol.
 
 ## 📖 Introduction
 
