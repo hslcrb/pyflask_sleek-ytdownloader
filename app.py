@@ -2,10 +2,13 @@ import os
 import subprocess
 import sys
 import json
-import time
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify, Response, stream_with_context
 import yt_dlp
+
+from metadata import MetadataCache, summarize
+
+metadata_cache = MetadataCache()
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -75,47 +78,24 @@ def index():
 def intro():
     return render_template('intro.html')
 
+def extract_metadata(url):
+    with yt_dlp.YoutubeDL({'quiet': True, 'no_warnings': True}) as ydl:
+        return summarize(ydl.extract_info(url, download=False))
+
+
 @app.route('/api/info', methods=['POST'])
 def get_info():
-    data = request.json
-    url = data.get('url')
-    
-    if not url:
-        return jsonify({'error': 'URL을 입력해주세요.'}), 400
+    data = request.get_json(silent=True)
+    url = data.get('url') if isinstance(data, dict) else None
+    if not isinstance(url, str) or not url.strip() or len(url) > 4096:
+        return jsonify({'error': '유효한 URL을 입력해주세요.'}), 400
+    url = url.strip()
 
     try:
-        ydl_opts = {'quiet': True, 'no_warnings': True}
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
-            
-            formats = []
-            seen_res = set()
-            available_formats = info.get('formats', [])
-            
-            # Sort by height descending
-            sorted_formats = sorted(available_formats, key=lambda x: (x.get('height') or 0), reverse=True)
-            
-            for f in sorted_formats:
-                if f.get('vcodec') != 'none':
-                    res = f.get('height')
-                    if res and res not in seen_res:
-                        seen_res.add(res)
-                        formats.append({
-                            'format_id': f['format_id'],
-                            'height': res,
-                            'filesize': f.get('filesize') or f.get('filesize_approx'),
-                            'ext': f['ext']
-                        })
-            
-            return jsonify({
-                'title': info.get('title'),
-                'thumbnail': info.get('thumbnail'),
-                'duration': time.strftime('%M:%S', time.gmtime(info.get('duration', 0))),
-                'uploader': info.get('uploader'),
-                'formats': formats
-            })
+        return jsonify(metadata_cache.get(url, lambda: extract_metadata(url)))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/api/download', methods=['POST'])
 def download_api():
