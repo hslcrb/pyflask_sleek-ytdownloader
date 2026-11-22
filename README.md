@@ -45,10 +45,10 @@ Sleek is designed for those who value **aesthetics**, **privacy**, and **control
 
 ### 1. Portable packages
 1. Open [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases) and select a package that explicitly lists your platform.
-2. For the Windows x64 portable preview, extract the entire ZIP and double-click `SleekDownloader.cmd`. If the browser does not open, visit `http://127.0.0.1:5000`.
+2. For the Windows x64 preview, run `Setup.exe` or extract the entire portable ZIP and double-click `SleekDownloader.exe`. If the browser does not open, visit `http://127.0.0.1:5000`.
 3. For the older Linux archive, run the included `SleekDownloader` executable.
 
-[Development log and reproducible Windows build (Korean)](docs/2026-11-22-performance-windows.ko.md)
+[Performance log](docs/2026-11-22-performance-windows.ko.md) · [Reproducible Windows EXE build (Korean)](docs/2026-11-22-windows-exe.ko.md)
 
 ### 2. Run via Docker
 Sleek is available as a Docker image on GitHub Packages:

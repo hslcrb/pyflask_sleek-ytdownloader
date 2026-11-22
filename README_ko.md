@@ -45,10 +45,10 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 
 ### 1. 포터블 패키지로 실행
 1. [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases)에서 운영체제가 명시된 파일을 선택하세요.
-2. Windows x64 포터블 프리뷰는 ZIP을 전부 풀고 `SleekDownloader.cmd`를 실행합니다. 브라우저가 열리지 않으면 `http://127.0.0.1:5000`으로 접속하세요.
+2. Windows x64 프리뷰는 `Setup.exe`로 설치하거나 포터블 ZIP을 전부 풀어 `SleekDownloader.exe`를 실행합니다. 브라우저가 열리지 않으면 `http://127.0.0.1:5000`으로 접속하세요.
 3. 이전 Linux ZIP은 포함된 `SleekDownloader` 실행 파일을 사용합니다.
 
-[성능 개선 개발기와 Windows 빌드 재현 방법](docs/2026-11-22-performance-windows.ko.md)
+[성능 개선 개발기](docs/2026-11-22-performance-windows.ko.md) · [Windows EXE 빌드와 사용법](docs/2026-11-22-windows-exe.ko.md)
 
 ### 2. Docker로 실행
 Sleek은 GitHub Packages에서 Docker 이미지로 제공됩니다:
