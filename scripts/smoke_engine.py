@@ -4,6 +4,7 @@ import argparse
 import functools
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
+import os
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
@@ -13,7 +14,9 @@ from threading import Thread
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("engine", type=Path)
+    parser.add_argument("--bundled", action="store_true", help="Run the engine with an empty PATH, using only its bundled tools")
     args = parser.parse_args()
+    engine_env = {**os.environ, "PATH": os.devnull} if args.bundled else None
     engine = args.engine.resolve()
     with TemporaryDirectory() as temp:
         root = Path(temp)
@@ -30,7 +33,7 @@ def main():
             url = f"http://127.0.0.1:{server.server_port}/index.html"
             for mode, suffix in [("video", ".mp4"), ("audio", ".mp3")]:
                 result = subprocess.run([str(engine), "download", url, "--" + mode, "--output",
-                                         str(root / mode), "--json"], capture_output=True, text=True, timeout=35)
+                                         str(root / mode), "--json"], capture_output=True, text=True, timeout=35, env=engine_env)
                 assert result.returncode == 0, (result.stdout, result.stderr)
                 events = [json.loads(line) for line in result.stdout.splitlines()]
                 saved = next(e for e in events if e["event"] == "saved")

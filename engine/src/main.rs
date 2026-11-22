@@ -93,7 +93,12 @@ fn download_args(job: &Download, ffmpeg: &Path, deno: Option<&Path>) -> Vec<std:
 fn executable(name: &str) -> Option<PathBuf> {
     let filename = format!("{name}{}", env::consts::EXE_SUFFIX);
     let installed = env::current_exe().ok()?.parent()?.to_path_buf();
-    let dirs = [installed.join("tools"), installed.clone()];
+    let bundle = installed.join("tools");
+    let bundled = bundle.join(&filename);
+    if bundled.is_file() { return Some(bundled); }
+    // Published packages are self-contained. Do not silently pick up stale PATH tools.
+    if bundle.join(".sleek-bundle").is_file() { return None; }
+    let dirs = [installed];
     dirs.into_iter().chain(env::var_os("PATH").into_iter().flat_map(|p| env::split_paths(&p).collect::<Vec<_>>()))
         .filter(|p| p.is_absolute()).map(|p| p.join(&filename)).find(|p| p.is_file())
 }
@@ -135,7 +140,7 @@ impl<W: Write> Reporter<W> {
 
 fn run_download(job: Download, report: &mut Reporter<impl Write>) -> u8 {
     let (Some(ytdlp), Some(ffmpeg), Some(_)) = (executable("yt-dlp"), executable("ffmpeg"), executable("ffprobe")) else {
-        return report.fail("dependency_missing", "Install yt-dlp, FFmpeg and FFprobe, then run sleek doctor.", 3);
+        return report.fail("dependency_missing", "A media tool is missing. Run sleek doctor; re-extract the official bundle if needed.", 3);
     };
     if fs::create_dir_all(&job.output).is_err() {
         return report.fail("output_unavailable", "Could not create the output directory.", 2);
