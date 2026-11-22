@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Sleek Downloader</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="renderer.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Sleek Downloader</h1>
+    <form>
+      <label for="url">Media URL</label>
+      <input id="url" name="url" type="url" placeholder="https://…" required maxlength="4096">
+      <label for="mode">Format</label>
+      <select id="mode"><option value="video">Video</option><option value="audio">Audio (MP3)</option></select>
+      <label class="inline"><input type="checkbox" id="comments" checked> Save available comments</label>
+      <p class="hint">Descriptions and metadata are saved automatically.</p>
+      <div class="folder"><button type="button" id="folder">Choose folder</button><output id="directory" aria-label="Download folder"></output></div>
+      <div class="actions"><button type="submit" id="start">Download</button><button type="button" id="stop" disabled>Cancel</button></div>
+    </form>
+    <progress max="100" value="0" aria-label="Download progress"></progress>
+    <p id="status" role="status">Ready</p>
+    <details><summary>Download details</summary><pre id="log"></pre></details>
+  </main>
+</body>
+</html>

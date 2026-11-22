@@ -1,0 +1,20 @@
+:root { color-scheme: light dark; font: 16px system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 0; }
+main { max-width: 760px; margin: auto; padding: clamp(16px, 4vw, 32px); }
+h1 { margin: 0 0 20px; font-size: clamp(1.4rem, 4vw, 2rem); }
+form { display: grid; gap: 8px; }
+input, select, button { min-height: 40px; font: inherit; border: 1px solid GrayText; border-radius: 8px; padding: 6px 10px; }
+select { width: min(220px, 100%); }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+#start { background: Highlight; color: HighlightText; border-color: transparent; }
+.inline, .folder, .actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.inline input { min-height: auto; }
+.hint { margin: 0; color: GrayText; }
+.folder, .actions { margin-top: 6px; }
+#directory { overflow-wrap: anywhere; }
+progress { width: 100%; margin-top: 18px; }
+#status { overflow-wrap: anywhere; }
+summary { cursor: pointer; }
+pre { max-height: 124px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
