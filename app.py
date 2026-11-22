@@ -231,31 +231,41 @@ def open_file():
     except:
         return jsonify({'success': False, 'error': '파일을 열 수 없습니다.'}), 500
 
-@app.route('/api/select_folder', methods=['POST'])
-def select_folder_dialog():
+def pick_download_folder():
     try:
         import tkinter as tk
         from tkinter import filedialog
-        
-        root = tk.Tk()
+    except ImportError:
+        if sys.platform != 'win32':
+            raise
+        from windows_folder import choose_windows_folder
+        return choose_windows_folder()
+
+    root = tk.Tk()
+    try:
         root.withdraw()
         root.attributes('-topmost', True)
-        
-        folder_path = filedialog.askdirectory(title="Select Download Folder")
+        return filedialog.askdirectory(title="Select Download Folder")
+    finally:
         root.destroy()
-        
-        if folder_path:
-            config = load_config()
-            config['download_path'] = folder_path
-            save_config(config)
-            return jsonify({'success': True, 'path': folder_path})
-        else:
+
+
+@app.route('/api/select_folder', methods=['POST'])
+def select_folder_dialog():
+    try:
+        folder_path = pick_download_folder()
+        if not folder_path:
             return jsonify({'success': False, 'message': 'Selection cancelled'})
-            
+        config = load_config()
+        config['download_path'] = folder_path
+        save_config(config)
+        return jsonify({'success': True, 'path': folder_path})
     except ImportError:
-         return jsonify({'error': 'Tkinter not installed. Cannot open file dialog.'}), 501
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Tkinter not installed. Cannot open file dialog.'}), 501
+    except Exception:
+        app.logger.exception("Folder dialog failed")
+        return jsonify({'error': '폴더 선택 창을 열 수 없습니다. 경로를 직접 입력해 주세요.'}), 500
+
 
 @app.route('/api/settings/path', methods=['GET', 'POST'])
 def handle_path_settings():
