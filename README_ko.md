@@ -19,6 +19,10 @@
 [English](README.md) | [한국어](README_ko.md)
 ---
 
+## Electron 데스크톱과 에이전트 CLI
+
+v2 릴리즈 후보는 브라우저나 Flask 서버를 열지 않습니다. Electron 앱과 영어 명령의 Rust CLI가 같은 엔진을 사용하며, 설명·메타데이터·가져올 수 있는 댓글을 기본 저장합니다. Windows 설치와 영어 CLI, JSON 출력은 [사용 안내](docs/desktop-cli.md)를 참고하세요.
+
 ## 📖 소개
 
 **Sleek(슬릭)**은 현대적이고 미니멀한 유튜브 다운로더이자 미디어 아카이버입니다. **Flask**를 기반으로 강력한 **yt-dlp** 엔진을 활용하며, 이 모든 기능을 아름다운 고성능 글래스모피즘(Glassmorphism) UI로 감쌌습니다.
