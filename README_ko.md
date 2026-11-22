@@ -43,13 +43,12 @@ Sleek은 **심미성**, **프라이버시**, 그리고 **통제권**을 중요�
 
 ## 🚀 설치 및 시작하기
 
-### 1. 간편 실행 (빌드된 실행 파일 사용) - **권장**
-새로운 버전을 가장 쉽게 사용하는 방법은 미리 빌드된 실행 파일을 다운로드하는 것입니다.
-1. [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases) 페이지로 이동합니다.
-2. 사용 중인 OS(Windows, Linux, macOS)에 맞는 `.zip` 파일을 다운로드합니다.
-3. 압축을 해제합니다.
-4. `SleekDownloader` 실행 파일을 실행합니다.
-5. 브라우저 창이 자동으로 열리지 않을 경우, 주소창에 `http://localhost:5000`을 입력하여 접속하세요.
+### 1. 포터블 패키지로 실행
+1. [Releases](https://github.com/hslcrb/pyflask_sleek-ytdownloader/releases)에서 운영체제가 명시된 파일을 선택하세요.
+2. Windows x64 포터블 프리뷰는 ZIP을 전부 풀고 `SleekDownloader.cmd`를 실행합니다. 브라우저가 열리지 않으면 `http://127.0.0.1:5000`으로 접속하세요.
+3. 이전 Linux ZIP은 포함된 `SleekDownloader` 실행 파일을 사용합니다.
+
+[성능 개선 개발기와 Windows 빌드 재현 방법](docs/2026-11-22-performance-windows.ko.md)
 
 ### 2. Docker로 실행
 Sleek은 GitHub Packages에서 Docker 이미지로 제공됩니다:
