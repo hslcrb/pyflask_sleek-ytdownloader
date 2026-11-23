@@ -1,0 +1,11 @@
+{
+  "name": "sleek-downloader",
+  "productName": "Sleek Downloader",
+  "version": "2.0.0-rc.2",
+  "private": true,
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test src/*.test.cjs"
+  }
+}

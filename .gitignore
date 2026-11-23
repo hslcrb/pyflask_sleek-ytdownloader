@@ -48,3 +48,9 @@ Thumbs.db
 config.json
 
 .venv/
+
+# Electron/Rust build outputs
+desktop/node_modules/
+engine/target/
+dist-v2/
+dist-bundled/

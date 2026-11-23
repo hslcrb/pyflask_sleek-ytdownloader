@@ -19,6 +19,10 @@
 [English](README.md) | [한국어](README_ko.md)
 ---
 
+## Desktop and agent CLI
+
+The v2 bundled release candidate adds a native Electron window and a standalone Rust CLI. No browser or Flask server is opened. Both save descriptions, metadata and available comments by default. Windows and Linux x64 packages include the media tools. See the [desktop and CLI guide](docs/desktop-cli.md) for Windows setup, commands and the JSON protocol.
+
 ## 📖 Introduction
 
 **Sleek** is a modern, minimalist YouTube downloader and media archiver. Built with **Flask** and powered by the robust **yt-dlp** engine, it wraps powerful functionality in a stunning, high-performance Glassmorphism UI.
